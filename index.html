@@ -55,7 +55,7 @@
             const link = document.getElementById('youtubeLink').value;
             const videoId = extractVideoId(link);
             if (videoId) {
-                const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}`;
+                const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0`;
                 document.getElementById('videoPlayer').src = embedUrl;
             } else {
                 alert('Please enter a valid YouTube link.');
