@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        #videoPlayer {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 720px;
+            height: 405px;
+            border: none;
+        }
+        input[type="text"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Video Player</h1>
+    <input type="text" id="youtubeLink" placeholder="Enter YouTube link here">
+    <button onclick="playVideo()">Play Video</button>
+    <iframe id="videoPlayer"></iframe>
+
+    <script>
+        function playVideo() {
+            const link = document.getElementById('youtubeLink').value;
+            const videoId = extractVideoId(link);
+            if (videoId) {
+                const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                document.getElementById('videoPlayer').src = embedUrl;
+            } else {
+                alert('Please enter a valid YouTube link.');
+            }
+        }
+
+        function extractVideoId(url) {
+            const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|embed|e)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+    </script>
+</body>
+</html>
